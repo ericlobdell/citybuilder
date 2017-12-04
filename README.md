@@ -1,1 +1,1 @@
-[![Build Status] (https://travis-ci.org/ericlobdell/citybuilder.svg?branch=master)](https://travis-ci.org/ericlobdell/citybuilder)
+[![Build Status](https://travis-ci.org/ericlobdell/citybuilder.svg?branch=master)](https://travis-ci.org/ericlobdell/citybuilder)
