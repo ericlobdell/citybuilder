@@ -20,7 +20,7 @@ enum Being {
 struct Square {
     ground: TerrainGround,
     block: Option<TerrainBlock>,
-    beings: Option<Being>
+    being: Option<Being> 
 }
 
 struct Grid {
@@ -28,16 +28,38 @@ struct Grid {
     squares: Vec<Square>
 }
 
+enum Direction {
+    West,
+    East,
+    North,
+    South
+}
+
+#[derive(PartialEq,Debug)]
+enum MovementError {
+    NoBeingInSquare
+}
+
 impl Grid {
+    fn move_being_in_coord(&self, coord: (usize,usize), dir: Direction) -> Result<(usize,usize), MovementError> {
+        let square = self.squares.get(coord.0 * self.size.0 + coord.1)
+            .expect("Index out of bounds trying to get being");
+
+        match square.being {
+            Some(_) => Ok((0,0)),
+            None => Err(MovementError::NoBeingInSquare)
+        }
+    }
+
     fn generate_empty(size_x: usize, size_y: usize) -> Grid {
         let number_of_squares = size_x * size_y;
         let mut squares: Vec<Square> = Vec::with_capacity(number_of_squares);
 
         for _ in 0..number_of_squares {
             squares.push( Square {
-                ground: TerrainGround::Soil, 
+                ground: TerrainGround::Soil,  
                 block: None, 
-                beings: None});
+                being: None });
         }
 
         Grid {
